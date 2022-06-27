@@ -1,2 +1,3 @@
 # server-templates
-simple project structures, mostly server setups
+simple server projects, mostly setups <br>
+.\venv\Scripts\activate
