@@ -9,7 +9,7 @@ from random import random
 
 
 # main variables
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__, template_folder='templates', static_folder='static')
 socketio = SocketIO(app, cors_allowed_origins="*", logger=False, engineio_logger=False)
 
 
