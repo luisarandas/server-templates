@@ -64,7 +64,7 @@ check_pip() {
 # Create virtual environment if it doesn't exist
 setup_venv() {
     if [ ! -d "venv" ]; then
-        print_status "Creating virtual environment..."
+        print_status "Creating virtual environment"
         $PYTHON_CMD -m venv venv
         print_success "Virtual environment created successfully"
     else
@@ -74,7 +74,7 @@ setup_venv() {
 
 # Activate virtual environment
 activate_venv() {
-    print_status "Activating virtual environment..."
+    print_status "Activating virtual environment"
     source venv/bin/activate
     
     # Verify activation
@@ -88,7 +88,7 @@ activate_venv() {
 
 # Upgrade pip
 upgrade_pip() {
-    print_status "Upgrading pip..."
+    print_status "Upgrading pip"
     $PIP_CMD install --upgrade pip
     print_success "pip upgraded successfully"
 }
@@ -96,7 +96,7 @@ upgrade_pip() {
 # Install requirements
 install_requirements() {
     if [ -f "requirements.txt" ]; then
-        print_status "Installing requirements from requirements.txt..."
+        print_status "Installing requirements from requirements.txt"
         $PIP_CMD install -r requirements.txt
         print_success "Requirements installed successfully"
     else
@@ -107,7 +107,7 @@ install_requirements() {
 
 # Check if all required packages are installed
 verify_installation() {
-    print_status "Verifying installation..."
+    print_status "Verifying installation"
     
     # Check key packages
     python -c "import fastapi" 2>/dev/null && print_success "FastAPI installed" || print_error "FastAPI not found"
@@ -117,14 +117,14 @@ verify_installation() {
 
 # Create necessary directories
 create_directories() {
-    print_status "Creating necessary directories..."
+    print_status "Creating necessary directories"
     mkdir -p images uploads media
     print_success "Directories created successfully"
 }
 
 # Run the server
 run_server() {
-    print_status "Starting FastAPI server..."
+    print_status "Starting FastAPI server"
     echo ""
     echo "Server will be available at: http://localhost:8000"
     echo "API documentation at: http://localhost:8000/docs"
@@ -138,7 +138,7 @@ run_server() {
 
 # Main execution
 main() {
-    print_status "Starting setup process..."
+    print_status "Starting setup process"
     
     # Check prerequisites
     check_python
@@ -151,14 +151,10 @@ main() {
     install_requirements
     verify_installation
     create_directories
-    
-    # Run server
     run_server
 }
 
-# Handle script interruption
 trap 'echo ""; print_warning "Setup interrupted by user"; exit 1' INT
 
-# Run main function
 main
 

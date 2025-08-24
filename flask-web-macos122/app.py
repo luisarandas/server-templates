@@ -105,7 +105,7 @@ def handle_disconnect():
 
 # Graceful shutdown handler
 def signal_handler(sig, frame):
-    logger.info(f"Received signal {sig}, shutting down gracefully...")
+    logger.info(f"Received signal {sig}, shutting down gracefully")
     try:
         socketio.stop()
         logger.info("SocketIO stopped gracefully")

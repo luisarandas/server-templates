@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask + DearPyGUI Server</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; }
+        .status { background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .controls { text-align: center; margin: 20px 0; }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 0 10px; }
+        button:hover { background: #0056b3; }
+        .info { background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flask + DearPyGUI Server</h1>
+        
+        <div class="status" id="status">
+            <h3>Server Status</h3>
+            <p>Loading</p>
+        </div>
+        
+        <div class="controls">
+            <button onclick="startGUI()">Start GUI</button>
+            <button onclick="stopGUI()">Stop GUI</button>
+            <button onclick="refreshStatus()">Refresh Status</button>
+        </div>
+        
+        <div class="info">
+            <h3>About</h3>
+            <p>This server runs both a Flask web application and a DearPyGUI desktop interface.</p>
+            <p>The GUI provides server control and monitoring capabilities.</p>
+        </div>
+    </div>
+
+    <script>
+        function refreshStatus() {
+            fetch('/status')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status').innerHTML = `
+                        <h3>Server Status</h3>
+                        <p><strong>Web Server:</strong> ${data.web_server}</p>
+                        <p><strong>GUI App:</strong> ${data.gui_app}</p>
+                        <p><strong>GUI Ready:</strong> ${data.gui_ready}</p>
+                        <p><strong>Last Update:</strong> ${new Date(data.timestamp * 1000).toLocaleString()}</p>
+                    `;
+                })
+                .catch(error => {
+                    document.getElementById('status').innerHTML = '<h3>Server Status</h3><p style="color: red;">Error loading status</p>';
+                });
+        }
+
+        function startGUI() {
+            fetch('/gui/start', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    refreshStatus();
+                });
+        }
+
+        function stopGUI() {
+            fetch('/gui/stop', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    refreshStatus();
+                });
+        }
+
+        // Auto-refresh status every 5 seconds
+        setInterval(refreshStatus, 5000);
+        refreshStatus();
+    </script>
+</body>
+</html>

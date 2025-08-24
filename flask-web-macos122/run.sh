@@ -40,27 +40,27 @@ fi
 
 # Create local venv if it doesn't exist
 if [ ! -d "venv" ]; then
-    echo -e "${YELLOW}Creating virtual environment...${NC}"
+    echo -e "${YELLOW}Creating virtual environment${NC}"
     $PYTHON_CMD -m venv venv
     echo -e "${GREEN}Virtual environment created${NC}"
 fi
 
 # Activate venv and install requirements
-echo -e "${YELLOW}Activating virtual environment...${NC}"
+echo -e "${YELLOW}Activating virtual environment${NC}"
 source venv/bin/activate
 
-echo -e "${YELLOW}Installing/updating requirements...${NC}"
+echo -e "${YELLOW}Installing/updating requirements${NC}"
 pip install --upgrade pip --quiet
 pip install -r requirements.txt --quiet
 
 # Check if all required packages are installed
-echo -e "${YELLOW}Verifying dependencies...${NC}"
+echo -e "${YELLOW}Verifying dependencies${NC}"
 python -c "import flask, flask_socketio; print('✓ Dependencies verified')" 2>/dev/null || {
     echo -e "${RED}Error: Required packages not properly installed${NC}"
     exit 1
 }
 
-echo -e "${GREEN}Setup complete! Starting Flask app...${NC}"
+echo -e "${GREEN}Setup complete! Starting Flask app${NC}"
 
 # Set Flask environment variables with defaults
 export FLASK_APP=app
@@ -73,12 +73,12 @@ echo -e "${BLUE}Host: ${HOST}:${PORT}${NC}"
 
 # Graceful shutdown handler
 cleanup() {
-    echo -e "\n${YELLOW}Shutting down gracefully...${NC}"
+    echo -e "\n${YELLOW}Shutting down gracefully${NC}"
     exit 0
 }
 
 trap cleanup SIGINT SIGTERM
 
 # Run the app
-echo -e "${GREEN}Starting Flask application...${NC}"
+echo -e "${GREEN}Starting Flask application${NC}"
 python app.py
