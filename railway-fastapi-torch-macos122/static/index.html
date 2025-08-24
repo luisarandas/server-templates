@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add favicon -->
+    <link rel="icon" href="/static/favicon.png" type="image/png">
+    <title>fastapi-torch-railway</title>
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+
+    <div class="black-bar top"></div>
+    <h2>FastAPI DL image app</h1>
+
+    <form id="uploadform" action="uploadimages" method="post" enctype="multipart/form-data">
+        <label for="images" class="custom-file-upload">Upload image</label>
+        <input type="file" id="images" name="images" multiple accept="image/jpg, image/jpeg, image/png" style="display: none;">
+        <input type="submit" id="Submit">
+    </form>
+
+    <br>
+
+    <button type="button" id="process_1">Describe using ViT</button>
+
+    <div class="container">
+        <div class="imageplaceholder1">
+            <!-- (input) -->
+        </div>
+        <div class="imageplaceholder2">
+            <div class="loader"></div>
+            <!-- (output) -->
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+    
+    <div class="black-bar bottom"></div>
+
+</body>
+
+</html>
+

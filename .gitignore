@@ -60,3 +60,9 @@ instance/
 
 # Logs
 *.log
+
+
+__pycache__
+images
+uploads
+venv

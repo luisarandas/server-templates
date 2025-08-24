@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI Image Server</title>
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+
+    <div class="black-bar top"></div>
+    <h2>FastAPI Image Server</h2>
+
+    <form id="uploadform" action="uploadimages" method="post" enctype="multipart/form-data">
+        <label for="images" class="custom-file-upload">Upload Image</label>
+        <input type="file" id="images" name="images" multiple accept="image/jpg, image/jpeg, image/png" style="display: none;">
+        <input type="submit" id="Submit" value="Upload">
+    </form>
+
+    <div class="container">
+        <div class="imageplaceholder1">
+            <p class="upload-hint">Uploaded images will appear here</p>
+        </div>
+        <div class="imageplaceholder2">
+            <p class="status-hint">Server status and information</p>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+    
+    <div class="black-bar bottom"></div>
+
+</body>
+</html>
+
